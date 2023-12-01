@@ -17,8 +17,8 @@ from recipe.serializers import (
     RecipeDetailSerializer,
 )
 
-
 RECIPES_URL = reverse('recipe:recipe-list')
+
 
 def detail_url(recipe_id):
     """Create and return a recipe detail URL."""
@@ -39,6 +39,7 @@ def create_recipe(user, **params):
 
     recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
+
 
 def create_user(**params):
     """Create and return a new user."""
@@ -141,8 +142,8 @@ class PrivateRecipeAPITests(TestCase):
         recipe = create_recipe(
             user=self.user,
             title='Sample recipe title',
-            link = 'https://example.com/recipe.pdf',
-            description = 'Sample Description'
+            link='https://example.com/recipe.pdf',
+            description='Sample Description'
         )
 
         payload = {
@@ -168,7 +169,7 @@ class PrivateRecipeAPITests(TestCase):
         recipe = create_recipe(user=self.user)
 
         payload = {'user': new_user.id}
-        url =detail_url(recipe.id)
+        url = detail_url(recipe.id)
         self.client.patch(url, payload)
 
         recipe.refresh_from_db()
